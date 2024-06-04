@@ -1,0 +1,72 @@
+# default layout (can be bsp, stack or float)
+yabai -m config layout bsp
+
+# new window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+# padding set to 12px
+yabai -m config top_padding 5
+yabai -m config bottom_padding 5
+yabai -m config left_padding 5
+yabai -m config right_padding 5
+yabai -m config window_gap 5
+yabai -m config external_bar main:-15:0
+# yabai -m config top_padding  40
+
+# Reduce Redraw lag 
+yabai -m signal --add event=space_changed action="hs -A -c 'stackline.manager:update({forceRedraw = true})'"
+
+# -- mouse settings --
+
+# stop teleporting my mouse
+# yabai -m config mouse_follows_focus off
+# focus will be following by the motion of the mouse
+yabai -m config focus_follows_mouse autofocus
+# modifier for clicking and dragging with mouse
+yabai -m config mouse_modifier shift + alt
+# set modifier + left-click drag to move window
+yabai -m config mouse_action1 move
+# set modifier + right-click drag to resize window
+yabai -m config mouse_action2 resize
+
+# when window is dropped in center of another window, swap them (on edges it will split it)
+# yabai -m mouse_drop_action swap
+
+
+
+# in external display, top padding is different
+# on M1 or later macbook, the notch space working as padding
+DISPLAY_UUID=06B3A325-0000-0000-0B20-010380361E78 # UUID of built-in display
+BAR_PADDING=35
+SPACES_ON_SUB=$(yabai -m query --displays | jq ".[] | select(.uuid != \"${DISPLAY_UUID}\") | .spaces[]")
+
+for idx in ${SPACES_ON_SUB}
+do
+    yabai -m config --space "$idx" top_padding "$BAR_PADDING"
+done
+
+NORMAL_BAR=15
+# If the notched display is added, set external_bar to "main:$NOTCH_OFFSET:0". This will decrease the padding on the main (notched) screen
+yabai -m signal --add event=display_added action="if [[ \"\$(yabai -m query --displays | jq \".[] | select(.id == \$YABAI_DISPLAY_ID) | .uuid\")\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar \"main:$NOTCH_OFFSET:0\"; fi"
+# If the notched display is removed, set external_bar to off so the main screen (which is now not notched) no longer has a padding decrease
+yabai -m signal --add event=display_removed action="if [[ ! \"\$(yabai -m query --displays | jq '.[].uuid')\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar off:0:0; fi"
+
+
+# disable specific apps
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^QuickTime Player$" manage=off
+yabai -m rule --add app="^The Unarchiver$" manage=off
+yabai -m rule --add app="^Archive Utility$" manager=off
+yabai -m rule --add app="^Xnapper$" manage=off
+
+yabai -m rule --add app="^(System Settings|System Information|Activity Monitor|FaceTime|Screen Sharing|Calculator|Stickies|TinkerTool|Progressive Downloader|Transmission|Airflow)$" manage=off
+
+yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+
+
+
+source "$HOME/.config/colors.sh"
+borders active_color=$COLOR_ACCENT_BRIGHT inactive_color=0xff414550 width=5.0 &

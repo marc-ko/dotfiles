@@ -1,0 +1,30 @@
+live_config_reload = true
+
+import = [
+    "~/.config/alacritty/themes/themes/coolnight.toml"
+]
+
+
+[font]
+size = 15.0
+normal.family = "MesloLGS Nerd Font"
+
+[window]
+decorations = "Buttonless"
+dynamic_padding = false
+opacity = 0.55
+blur = true
+option_as_alt = "Both"
+
+[window.padding]
+x = 12
+y = 12
+
+[cursor.style]
+blinking = "On"
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]
