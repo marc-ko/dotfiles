@@ -80,7 +80,7 @@ shift + alt - 7 : yabai -m window --space 7;
 # App shortcut
 alt - b : open -a "Firefox Developer Edition" 
 shift + alt - b : open -a "Arc"
-alt - t : open -a "Alacritty" -n
+alt - return : open -a "Alacritty" -n
 alt - v : open -a "Visual Studio Code"
 
 # -- Starting/Stopping/Restarting Yabai --
