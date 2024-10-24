@@ -5,11 +5,11 @@ yabai -m config layout bsp
 yabai -m config window_placement second_child
 
 # padding set to 12px
-yabai -m config top_padding 5
-yabai -m config bottom_padding 5
-yabai -m config left_padding 5
-yabai -m config right_padding 5
-yabai -m config window_gap 5
+yabai -m config top_padding 8 
+yabai -m config bottom_padding 8
+yabai -m config left_padding 8
+yabai -m config right_padding 8
+yabai -m config window_gap 8
 yabai -m config external_bar main:-15:0
 # yabai -m config top_padding  40
 
@@ -45,7 +45,7 @@ do
     yabai -m config --space "$idx" top_padding "$BAR_PADDING"
 done
 
-NORMAL_BAR=15
+NORMAL_BAR=35
 # If the notched display is added, set external_bar to "main:$NOTCH_OFFSET:0". This will decrease the padding on the main (notched) screen
 yabai -m signal --add event=display_added action="if [[ \"\$(yabai -m query --displays | jq \".[] | select(.id == \$YABAI_DISPLAY_ID) | .uuid\")\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar \"main:$NOTCH_OFFSET:0\"; fi"
 # If the notched display is removed, set external_bar to off so the main screen (which is now not notched) no longer has a padding decrease
