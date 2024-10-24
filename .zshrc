@@ -12,6 +12,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=~/.npm-global/bin:$PATH
 
 # Path to your oh-my-zsh installation.
  export ZSH="$HOME/.oh-my-zsh"
@@ -21,7 +22,6 @@ fi
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 
 # Set list of themes to pick from when loading at random
@@ -122,6 +122,9 @@ alias xampp="open /Applications/XAMPP/manager-osx.app"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 #buseta
 
 export PATH="$PATH:$HOME/.dart/flutter/bin"
