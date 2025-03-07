@@ -40,6 +40,7 @@ shift + alt - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
 # -- Modifying Window Size --
 
 # maximize a window
+shift + alt - m : yabai -m window --toggle zoom-fullscreen
 alt - f : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
@@ -78,10 +79,10 @@ shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 
 # App shortcut
-alt - b : open -a "Arc" 
-shift + alt - b : open -a "Arc"
-alt - return : open -a "Alacritty" -n
-alt - v : open -a "Visual Studio Code"
+alt - b : open -a "Zen Browser" 
+shift + alt - b : open -a "Zen Browser"
+alt - return : open -a "wezTerm" -n 
+alt - v : open -a "Cursor"
 
 # -- Starting/Stopping/Restarting Yabai --
 # stop/start/restart yabai
